@@ -13,7 +13,16 @@ exports.getListPage = (req, res) => {
 
 //后台页面管理
 exports.getAdminIndexPage = (req, res) => {
-    res.render('admin/index.ejs');
+    //进行登录状态的验证
+    if (req.session.isLogin && req.session.isLogin == 'true') {
+        res.render('admin/index.ejs');
+    } else {
+        res.writeHeader(301, {
+            'location': '/admin/login',
+        })
+        res.render('admin/index.ejs');
+    }
+
 }
 exports.getAdmincCategoriesPage = (req, res) => {
     res.render('admin/categories.ejs');
