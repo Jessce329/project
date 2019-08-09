@@ -7,7 +7,6 @@ let connection = mysql.createConnection({
     database: 'baixiu'
 });
 
-
 exports.login = (email, callback) => {
     //创建SQL语句
     let sql = `select * from users where email = "${email}"`

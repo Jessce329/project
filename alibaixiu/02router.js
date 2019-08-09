@@ -1,10 +1,12 @@
 const express = require('express');
 const pageController = require('./controller/pageController');
 const userController = require('./controller/userController');
+const postController = require('./controller/postController');
+const cateController = require('./controller/cateController');
 let router = express.Router();
 
 //后台页面
-router.get('/admin', pageController.getAdminIndexPage)
+router.get('/admin/', pageController.getAdminIndexPage)
     .get('/admin/categories', pageController.getAdmincCategoriesPage)
     .get('/admin/comments', pageController.getAdminCommentsPage)
     .get('/admin/login', pageController.getAdminLoginPage)
@@ -22,9 +24,8 @@ router.get('/admin', pageController.getAdminIndexPage)
     .get('/list', pageController.getListPage)
 
     //业务处理路由
-    .post('/login', userController.login);
-
-
-
+    .post('/login', userController.login)
+    .get('/getAllPost', postController.getAllPost)
+    .get('/getAllCate', cateController.getAllCate)
 
 module.exports = router;
