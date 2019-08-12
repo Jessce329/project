@@ -9,5 +9,20 @@ var itcast = {
             routerName = str.substring(str.lastIndexOf('/') + 1, str.indexOf('?'))
         }
         return routerName
+    },
+    // 获取参数
+    // str:?id=5&name=jack
+    getParameter: (str) => {
+        let obj = {};
+        //去除?
+        str = str.substring(1);
+        //按&分隔符进行分割
+        let temp = str.split('&');
+        //遍历
+        for (let i = 0; i < temp.length; i++) {
+            let arr = temp[i].split('=');
+            obj[arr[0]] = arr[1];
+        }
+        return obj;
     }
 }

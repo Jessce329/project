@@ -30,14 +30,20 @@ exports.getAllPost = (obj, callback) => {
     // 2.调用方法获取数据
     conn.query(sql, (err, results) => {
         if (err) {
-            1
             callback(err)
         } else {
             // 再创建sql语句 进行总记录的查询
             sql = `select count(*) as cnt
                     from posts
                     join users on posts.user_id = users.id
-                    join categories on posts.category_id = categories.id`
+                    join categories on posts.category_id = categories.id
+                    where 2=2 `
+            if (obj.cate && obj.cate != 'all') { // 有没有传递分类数据
+                sql += ` and category_id = ${obj.cate}`
+            }
+            if (obj.status && obj.status != 'all') {
+                sql += ` and posts.status ='${obj.status}'`
+            }
             conn.query(sql, (err2, res2) => {
                 if (err2) {
                     callback(err2)
@@ -49,3 +55,57 @@ exports.getAllPost = (obj, callback) => {
         }
     })
 }
+
+// 文章新增
+// update 表 set ? where ?
+exports.addPost = (obj, callback) => {
+    // ? 它会根据数据对象中的属性名称自动创建sql语句，语句 中修改的字段名称就是数据对象的属性名称
+    let sql = `insert into posts set ?`
+    // 这里直接传入对象，不用再添加[]
+    conn.query(sql, obj, (err, results) => {
+        if (err) {
+            callback(err)
+        } else {
+            callback(null)
+        }
+    })
+}
+
+
+// 根据id获取文章详细数据
+exports.getPostById = (id, callback) => {
+    var sql = 'select * from posts where id = ' + id
+    conn.query(sql, (err, results) => {
+        if (err) {
+            callback(err)
+        } else {
+            // 没有错误，不仅仅要返回之前的查询数据，而且还要返回当前查询的总记录数
+            callback(null, results[0])
+        }
+    })
+}
+
+// 根据文章id实现文章的编辑
+exports.editPostById = (obj, callback) => {
+    let sql = 'update posts set ? where id = ?'
+    conn.query(sql, [obj, obj.id], (err, results) => {
+        if (err) {
+            callback(err)
+        } else {
+            callback(null)
+        }
+    })
+}
+
+// 根据文章id实现文章的删除
+exports.delPostById = (id, callback) => {
+    let sql = 'delete from posts where id = ?'
+    conn.query(sql, [id], (err) => {
+        if (err) {
+            callback(err)
+        } else {
+            callback(null)
+        }
+    })
+}
+

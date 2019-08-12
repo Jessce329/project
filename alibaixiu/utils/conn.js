@@ -4,6 +4,8 @@ let connection = mysql.createConnection({
     user: 'root',
     password: 'root',
     database: 'baixiu',
+    //将日期格式进行转换
+    dateStrings: true
 })
 
 module.exports = connection;
