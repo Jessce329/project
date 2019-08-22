@@ -33,6 +33,9 @@ router.get('/admin', pageController.getAdminIndexPage)
     .get('/delPostById', postController.delPostById)
 
     .get('/getAllCate', cateController.getAllCate)
+    .post('/editCate', cateController.editCate)
+    .post('/addCate', cateController.addCate)
+    .get('/delCateById', cateController.delCateById)
 
     // 实现文件上传
     .post('/uploadFile', uploadController.uploadFile)

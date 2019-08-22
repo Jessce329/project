@@ -38,6 +38,14 @@ app.set('view engine', 'ejs');
 
 app.set('views', __dirname + '/views');
 
+app.use(function(req,res,next){
+    //设置允许进行跨域请求的源
+    res.header('Access-Control-Allow-Origin','*');
+    res.header('Access-Control-Allow-Methods','GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers','Content-Type')
+    res.header('Access-Control-Allow-Credentials','true')
+    next();
+})
 //导航守卫
 app.use(function (req, res, next) {
     //三种场合不用登录

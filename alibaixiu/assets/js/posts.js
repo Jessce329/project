@@ -73,4 +73,25 @@ $(function () {
         // 发起ajax请求
         init(obj)
     })
+
+
+
+    //文章删除功能 
+    $('tbody').on('click', 'btnDel', function () {
+        let id = $(this).data('id');
+        //确认删除
+        if (confirm('你确定要删除吗???')) {
+            $.ajax({
+                type: 'get',
+                url: '/delPostById?id=' + id,
+                dataType: 'json',
+                success: function (res) {
+                    if (res.msg) {
+                        $('.alert-danger > span').text(res.msg);
+                        $('.alert-danger').fadeIn(500).delay(300).fadeOut(500);
+                    }
+                }
+            })
+        }
+    })
 })
