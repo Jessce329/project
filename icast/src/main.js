@@ -9,14 +9,18 @@ import router from '@/routers/router.js'
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
+
+// 添加导航守卫
 router.beforeEach((to, from, next) => {
-  // 判断用户是否登录过或者是否跳转到login页面,如果是,就继续跳转
-  let token = localStorage.getItem('itcast_token')
-  if (token || to.path === '/login') {
+  // 1.获取token
+  let mytoken = localStorage.getItem('itcast_token')
+  // 2.判断
+  if (mytoken || to.path === '/login') {
+    // 下一步
     next()
   } else {
-    // 否则重定向到登录页面
-    next({ name: 'login' })
+    // 重定向
+    next({ path: '/login' })
   }
 })
 

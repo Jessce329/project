@@ -2,15 +2,15 @@
   <div class="login">
     <div class="container">
       <img src="../assets/avatar.jpg" alt class="avatar" />
-      <el-form :model="loginFrom" :rules="rules" ref="loginFrom" class="demo-ruleForm">
+      <el-form :model="loginForm" :rules="rules" ref="loginForm" class="demo-ruleForm">
         <el-form-item prop="username">
-          <el-input v-model="loginFrom.username" placeholder="请输入用户名" prefix-icon="myicon-user"></el-input>
+          <el-input v-model="loginForm.username" placeholder="请输入用户名" prefix-icon="myicon-user"></el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input v-model="loginFrom.password" placeholder="请输入密码"   prefix-icon="myicon-key" ></el-input>
+          <el-input v-model="loginForm.password" placeholder="请输入密码" prefix-icon="myicon-key"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="login" class="login-btn ">登录</el-button>
+          <el-button type="primary" @click="login" class="login-btn">登录</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -22,7 +22,7 @@ import { login } from '@/api/login_index.js'
 export default {
   data () {
     return {
-      loginFrom: {
+      loginForm: {
         username: '',
         password: ''
       },
@@ -48,17 +48,17 @@ export default {
     login () {
       // 再次实现数据验证
       // 我们可以通过表单的validate方法实现数据的验证方法,在验证完成的时候,会调用传入的回调函数,这个回调函数有一个参数valid,如果这个参数是true,则说明通过验证(可以继续通过你的登录请求),否则验证失败(阻止你的登录请求并且给出提示)
-      this.$refs.loginFrom.validate((valid) => {
+      this.$refs.loginForm.validate(valid => {
         if (valid) {
-          login(this.loginFrom)
-            .then((res) => {
+          login(this.loginForm)
+            .then(res => {
               if (res.data.meta.status === 200) {
                 this.$message({
                   message: '登录成功',
                   type: 'success'
                 })
                 // 路由跳转之后保存到本地
-                localStorage.setItem('itcast_token', res.data.meta.token)
+                localStorage.setItem('itcast_token', res.data.data.token)
                 // 进行路由跳转
                 this.$router.push({ name: 'home' })
               } else {
