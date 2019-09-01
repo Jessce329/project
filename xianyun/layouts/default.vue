@@ -1,10 +1,18 @@
 <template>
   <div>
+    <Header />
     <nuxt />
   </div>
 </template>
-
-<style>
+<script>
+import Header from '@/components/header'
+export default {
+  components: {
+    Header
+  }
+}
+</script>
+<style lang="less">
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -16,40 +24,21 @@ html {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+*{
   margin: 0;
+  padding: 0;
 }
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+ul,li,ol{
+  list-style: none
 }
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+a{
+  color:inherit;
+  text-decoration: none
 }
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+i,em{
+  font-style: normal
 }
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+a:hover{
+  color: inherit
 }
 </style>

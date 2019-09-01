@@ -1,5 +1,5 @@
 <template>
-  <div />
+  <div>存放用户模块的文件夹</div>
 </template>
 
 <script>
