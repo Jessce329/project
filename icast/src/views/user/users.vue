@@ -11,6 +11,7 @@
       placeholder="请输入内容"
       class="input-with-select"
       style="width:300px"
+      @keyup.enter.native="init"
     >
       <el-button slot="append" icon="el-icon-search" @click="init"></el-button>
     </el-input>
@@ -213,7 +214,7 @@ export default {
               }
               // this.init()
             } else {
-              this.$message.error(res.data.meta.msg)
+              this.$message.error('添加失败')
             }
           })
           .catch((err) => {
