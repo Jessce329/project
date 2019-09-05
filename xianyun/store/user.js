@@ -10,6 +10,12 @@ export const mutations = {
   // 保存用户信息到state
   setUserInfo (state, data) {
     state.userInfo = data
+  },
+  clearUserInfo (state, info) {
+    if (process.browser) {
+      localStorage.removeItem('userInfo')
+    }
+    state.userInfo = {}
   }
 }
 
@@ -21,6 +27,7 @@ export const actions = {
       method: 'POST',
       data
     }).then((res) => {
+      console.log(res)
       const data = res.data
       // 保存数据到state
       commit('setUserInfo', data)

@@ -22,7 +22,7 @@
         </el-row>
         <!-- 登录组件部分 -->
         <LoginForm v-if="currentTabs == 0" />
-        <Sign v-if="currentTabs == 1" />
+        <Register v-if="currentTabs == 1" />
       </div>
     </el-row>
   </div>
@@ -30,11 +30,11 @@
 
 <script>
 import LoginForm from '@/components/user/loginForm.vue'
-import Sign from '@/components/user/sign.vue'
+import Register from '@/components/user/register.vue'
 export default {
   components: {
     LoginForm,
-    Sign
+    Register
   },
   data () {
     return {

@@ -43,7 +43,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
     .footer{
         width: 100%;
         height: 400px;

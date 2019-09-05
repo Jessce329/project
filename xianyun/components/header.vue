@@ -23,8 +23,25 @@
         </nuxt-link>
       </el-row>
       <el-row>
+        <!-- 登录成功以后的用户下拉框 -->
+        <el-dropdown v-if="$store.state.user.userInfo.token">
+          <el-row type="flex" align="middle" class="el-dropdown-link ">
+            <nuxt-link to="#">
+              <img class="userimg" :src="$axios.defaults.baseURL + $store.state.user.userInfo.user.defaultAvatar">
+              {{ $store.state.user.userInfo.user.nickname }}
+              <i class="el-icon-arrow-down el-icon--right" />
+            </nuxt-link>
+          </el-row>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>用户中心</el-dropdown-item>
+            <el-dropdown-item @click.native="handleLoginOut">
+              退出
+            </el-dropdown-item>
+          </el-dropdown-menu>
+          <!-- 其他代码... -->
+        </el-dropdown>
         <!-- 登录/注册 -->
-        <nuxt-link to="/user/login">
+        <nuxt-link v-else to="/user/login">
           登录 / 注册
         </nuxt-link>
       </el-row>
@@ -34,7 +51,19 @@
 
 <script>
 export default {
+  data () {
+    return {
 
+    }
+  },
+  methods: {
+    handleLoginOut () {
+      const { commit } = this.$store
+      commit('user/clearUserInfo')
+      this.$message.success('退出成功')
+      this.$router.push('/user/login')
+    }
+  }
 }
 </script>
 
@@ -81,5 +110,14 @@ export default {
                 height: 42px;
                 display: block
             }
+        }
+        .userimg{
+          height: 36px;
+          width: 36px;
+          vertical-align: middle;
+          border-radius: 50%;
+        }
+        .userimg:hover{
+          border: 1px solid #409eff
         }
 </style>

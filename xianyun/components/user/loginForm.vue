@@ -46,7 +46,7 @@ export default {
       // console.log(this.loginForm)
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          /*  this.$axios({
+          /* this.$axios({
             url: '/accounts/login',
             method: 'POST',
             data: this.loginForm
